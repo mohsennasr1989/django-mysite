@@ -1,11 +1,20 @@
-<h1>This is Users List</h1>
+{% extends 'user/base.html' %}
+{% block body %}
+    <h1>This is Users List</h1>
 
-{% for user in user_list %}
-    <ul>
-        <li>
-            <a href="{% url 'user:detail' user.id %}">
-                {{user.user_id}} --- {{user.user_first_name}} {{user.user_last_name}}
-            </a>
-        </li>
-    </ul>
-{% endfor %}
+    {% for user in user_list %}
+        <div class="row">
+            <div class="col-md-3 offset-md-2">
+                <img class="card" height="150px" src="{{user.user_profile_image}}"/>
+            </div>
+            <div class="col-md-4">
+                <h3>{{ user.user_first_name}} {{user.user_last_name}}</h3>
+                <h5>{{ user.user_id}}</h5>
+                <h6>{{ user.user_cellphone}}</h6>
+            </div>
+            <div class="col-md-2">
+                <a href="{% url 'user:detail' user.id %}" class="btn btn-success">Detail</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

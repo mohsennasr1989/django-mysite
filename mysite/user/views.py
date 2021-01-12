@@ -19,3 +19,7 @@ def user_detail(request, user_id):
         'user': details,
     }
     return render(request, 'user/detail.html', context)
+
+
+def add_user():
+    return None
