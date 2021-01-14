@@ -4,15 +4,15 @@
 
     {% for user in user_list %}
         <div class="row">
-            <div class="col-md-3 offset-md-2">
+            <div class="col-md-2 offset-md-2">
                 <img class="card" height="150px" src="{{user.user_profile_image}}"/>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h3>{{ user.user_first_name}} {{user.user_last_name}}</h3>
                 <h5>{{ user.user_id}}</h5>
                 <h6>{{ user.user_cellphone}}</h6>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <a href="{% url 'user:detail' user.id %}" class="btn btn-success">Detail</a>
                 <a href="{% url 'user:edit' user.id %}" class="btn btn-warning">Edit</a>
                 <a href="{% url 'user:remove' user.id %}" class="btn btn-danger">Remove</a>

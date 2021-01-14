@@ -1,4 +1,5 @@
 # Create your views here.
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
 from .forms import UserForm
@@ -50,3 +51,8 @@ def remove_user(request, user_id):
         return redirect('user:index')
 
     return render(request, 'user/remove_confirm.html', {'user': user})
+
+
+def signup(request):
+    form = UserCreationForm()
+    return render(request, 'user/signup.html', {'form': form})
