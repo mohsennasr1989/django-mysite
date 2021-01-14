@@ -14,6 +14,8 @@
             </div>
             <div class="col-md-2">
                 <a href="{% url 'user:detail' user.id %}" class="btn btn-success">Detail</a>
+                <a href="{% url 'user:edit' user.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'user:remove' user.id %}" class="btn btn-danger">Remove</a>
             </div>
         </div>
     {% endfor %}

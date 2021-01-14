@@ -27,3 +27,26 @@ def add_user(request):
     if form.is_valid():
         form.save()
         return redirect('user:index')
+
+    return render(request, 'user/form.html', {'form': form})
+
+
+def edit_user(request, user_id):
+    user = User.objects.get(id=user_id)
+    form = UserForm(request.POST or None, instance=user)
+
+    if form.is_valid():
+        form.save()
+        return redirect('user:index')
+
+    return render(request, 'user/form.html', {'form': form, 'user': user})
+
+
+def remove_user(request, user_id):
+    user = User.objects.get(id=user_id)
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('user:index')
+
+    return render(request, 'user/remove_confirm.html', {'user': user})
