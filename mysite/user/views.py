@@ -1,8 +1,9 @@
 # Create your views here.
+from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
-from .forms import UserForm
+from .forms import UserForm, SignUpForm
 from .models import User
 
 
@@ -54,5 +55,12 @@ def remove_user(request, user_id):
 
 
 def signup(request):
-    form = UserCreationForm()
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Welcome {username}, You are signed up successfully')
+            return redirect('user:index')
+    else:
+        form = SignUpForm()
     return render(request, 'user/signup.html', {'form': form})
