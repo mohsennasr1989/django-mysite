@@ -1,23 +1,19 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 # Create your models here.
 
-class User(models.Model):
+class CustomUser(models.Model):
 
     def __str__(self):
-        return self.user_name
+        return self.user.username
 
-    user_id = models.CharField(max_length=20)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # user_id = models.CharField(max_length=20)
     firstname = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
-    username = models.CharField(max_length=200)
     cellphone = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    profile = models.CharField(max_length=500,  default="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png")
+    profile = models.ImageField(default='profile.jpg', upload_to='profile_images')
     create_date = models.DateTimeField(blank=True, null=True)
     last_login_date = models.DateTimeField(blank=True, null=True)
-
-
-
-
