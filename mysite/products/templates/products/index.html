@@ -1,0 +1,33 @@
+{% extends 'user/base.html' %}
+{% block body %}
+
+    <div class="card-body">
+        <h1>This is Products List</h1>
+    </div>
+
+    {% for product in products_list %}
+        <div class="row card-body">
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <img class="card" height="150px" src="{{MEDIA_URL}}{{product.image}}"/>
+            </div>
+            <div class="col-md-5">
+                <h3>{{ product.name }} {{ product.specification }}</h3>
+                <h5>Product Code: {{ product.code }}</h5>
+            </div>
+            {% if user.is_authenticated %}
+                <div class="col-md-1">
+                    <div class="row card">
+                        <a href="{% url 'product:detail' product.code %}" class="btn btn-success">Detail</a>
+                    </div>
+                    <div class="row card">
+                        <a href="{% url 'product:edit' product.code %}" class="btn btn-warning">Edit</a>
+                    </div>
+                    <div class="row card">
+                        <a href="{% url 'product:remove' product.code %}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

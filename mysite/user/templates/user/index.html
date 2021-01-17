@@ -2,20 +2,15 @@
 {% block body %}
     <h1>This is Users List</h1>
 
-    {% for user in user_list %}
-        <div class="row">
-            <div class="col-md-2 offset-md-2">
-                <img class="card" height="150px" src="{{MEDIA_URL}}{{user.profile}}"/>
+    {% for user in users_list %}
+        <div class="row card-body">
+            <div class="col-md-2">
+                <img class="card" height="150px" src="{{MEDIA_URL}}{{ user.profile }}"/>
             </div>
-            <div class="col-md-3">
-                <h3>{{ user.firstname}} {{user.lastname}}</h3>
-                <h5>{{ user.user_id}}</h5>
-                <h6>{{ user.cellphone}}</h6>
-            </div>
-            <div class="col-md-3">
-                <a href="{% url 'user:detail' user.id %}" class="btn btn-success">Detail</a>
-                <a href="{% url 'user:edit' user.id %}" class="btn btn-warning">Edit</a>
-                <a href="{% url 'user:remove' user.id %}" class="btn btn-danger">Remove</a>
+            <div class="col-md-4">
+                <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+                <h5>{{ user.user.username }}</h5>
+                <h6>{{ user.user.id }}</h6>
             </div>
         </div>
     {% endfor %}
