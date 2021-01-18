@@ -1,7 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 
-# Create your models here.
 class Products(models.Model):
 
     def __str__(self):
@@ -28,3 +29,7 @@ class Products(models.Model):
                                    , help_text='Product plural unit')
     package_quantity = models.IntegerField(default=1, blank=False, help_text='Product package quantity')
     image = models.ImageField(default='product.jpg', upload_to='products_images', help_text='Product image')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+    def get_absolute_url(self):
+        return reverse('product:detail', (), kwargs={'pk', self.pk})

@@ -14,7 +14,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Welcome {username}, You are signed up successfully')
-            return redirect('user:index')
+            return redirect('product:index')
     else:
         form = SignUpForm()
     return render(request, 'user/signup.html', {'form': form})
@@ -22,7 +22,7 @@ def signup(request):
 
 @login_required
 def profile(request):
-    user = CustomUser.objects.get(user_id=request.user.id)
+    user = CustomUser.objects.get(id=request.user.id)
     context = {
         'user': user
     }

@@ -3,12 +3,13 @@
 
     <div class="row card-body">
         <div class="col-md-4">
-            <img class="card" height="300px" src="{{ product.image.url }}"/>
+            <img class="card" height="300px" src="{{ object.image.url }}"/>
         </div>
         <div class="col-md-6">
-            <h1>{{ product.name }} {{ product.specification }}</h1>
-            <h2>Product Code: {{ product.code }}</h2>
-            <h3>Package Quantity: {{ product.package_quantity }} {{ product.singular_unit }}</h3>
+            <h1>{{ object.name }} {{ object.specification }}</h1>
+            <h2>Product Code: {{ object.code }}</h2>
+            <h3>Package Quantity: {{ object.package_quantity }} {{ object.singular_unit }}</h3>
+            <h5>Created By: {{ object.user }}</h5>
         </div>
     </div>
 

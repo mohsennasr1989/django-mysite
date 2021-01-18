@@ -18,13 +18,13 @@
             {% if user.is_authenticated %}
                 <div class="col-md-1">
                     <div class="row card">
-                        <a href="{% url 'product:detail' product.code %}" class="btn btn-success">Detail</a>
+                        <a href="{% url 'product:detail' product.id %}" class="btn btn-success">Detail</a>
                     </div>
                     <div class="row card">
-                        <a href="{% url 'product:edit' product.code %}" class="btn btn-warning">Edit</a>
+                        <a href="{% url 'product:edit' product.id %}" class="btn btn-warning">Edit</a>
                     </div>
                     <div class="row card">
-                        <a href="{% url 'product:remove' product.code %}" class="btn btn-danger">Remove</a>
+                        <a href="{% url 'product:remove' product.id %}" class="btn btn-danger">Remove</a>
                     </div>
                 </div>
             {% endif %}
