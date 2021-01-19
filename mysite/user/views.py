@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from .forms import SignUpForm
+from .forms import SignUpForm, EditUserForm
 from .models import CustomUser
 
 
@@ -20,18 +20,25 @@ def signup(request):
     return render(request, 'user/signup.html', {'form': form})
 
 
+def edit_user(request, user_id):
+    user = CustomUser.objects.get(pk=user_id)
+    form = EditUserForm(request.POST or None, instance=user)
+
+    if form.is_valid():
+        form.save()
+        return redirect('product:index')
+
+    return render(request, 'user/form.html', {'form': form, 'user': user})
+
+
 @login_required
 def profile(request):
     user = CustomUser.objects.get(id=request.user.id)
-    context = {
-        'user': user
-    }
-    return render(request, 'user/profile.html', context)
+
+    return render(request, 'user/profile.html', {'user': user})
 
 
 def users(request):
     users_list = CustomUser.objects.all()
-    context = {
-        'users_list': users_list,
-    }
-    return render(request, 'user/index.html', context)
+
+    return render(request, 'user/index.html', {'users_list': users_list})

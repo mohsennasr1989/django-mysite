@@ -75,14 +75,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'MY_SITE_DB',
-        # 'USER': 'Mohsen',
-        # 'PASSWORD': '1qaz!QAZ',
-        # 'HOST': 'localhost',
-        # 'PORT': '5432',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'django-db',
+        'USER': 'postgres',
+        'PASSWORD': '1qaz@WSX',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -119,9 +119,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'product:index'
 LOGOUT_REDIRECT_URL = 'product:index'

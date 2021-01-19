@@ -24,7 +24,7 @@ app_name = 'my_site'
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     # path('user/', include('user.urls'), name='user'),
-    path('product/', include('products.urls'), name='user'),
+    path('product/', include('products.urls'), name='product'),
     path('signup/', user_view.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='user/login.html', ), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='products/index.html'), name='logout'),

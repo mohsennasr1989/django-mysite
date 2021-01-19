@@ -21,8 +21,8 @@ class Products(models.Model):
 
     code = models.CharField(max_length=20, blank=False, help_text='Product 6 digits code')
     name = models.CharField(max_length=200, blank=False, help_text='Product name')
-    specification = models.CharField(max_length=300, help_text='Product specifications')
-    size = models.CharField(max_length=100, help_text='Product size')
+    specification = models.CharField(max_length=300, blank=True, help_text='Product specifications')
+    size = models.CharField(max_length=100, blank=True, help_text='Product size')
     singular_unit = models.CharField(max_length=10, choices=SINGULAR_UNIT_CHOICES, default='pieces', blank=False
                                      , help_text='Product singular unit')
     plural_unit = models.CharField(max_length=10, choices=PLURAL_UNIT_CHOICES, default='box', blank=False
@@ -32,4 +32,4 @@ class Products(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def get_absolute_url(self):
-        return reverse('product:detail', (), kwargs={'pk', self.pk})
+        return reverse('product:detail', kwargs={'pk': self.pk})

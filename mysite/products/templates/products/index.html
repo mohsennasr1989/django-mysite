@@ -1,4 +1,4 @@
-{% extends 'user/base.html' %}
+{% extends 'products/base.html' %}
 {% block body %}
 
     <div class="card-body">
@@ -14,6 +14,7 @@
             <div class="col-md-5">
                 <h3>{{ product.name }} {{ product.specification }}</h3>
                 <h5>Product Code: {{ product.code }}</h5>
+                <h5>Created By: {{ product.user }}</h5>
             </div>
             {% if user.is_authenticated %}
                 <div class="col-md-1">
