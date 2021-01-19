@@ -21,7 +21,7 @@ def signup(request):
 
 
 def edit_user(request, user_id):
-    user = CustomUser.objects.get(pk=user_id)
+    user = CustomUser.objects.get(user_id=user_id)
     form = EditUserForm(request.POST or None, instance=user)
 
     if form.is_valid():
@@ -33,7 +33,7 @@ def edit_user(request, user_id):
 
 @login_required
 def profile(request):
-    user = CustomUser.objects.get(id=request.user.id)
+    user = CustomUser.objects.get(user_id=request.user.id)
 
     return render(request, 'user/profile.html', {'user': user})
 
