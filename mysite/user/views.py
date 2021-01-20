@@ -21,24 +21,37 @@ def signup(request):
 
 
 def edit_user(request, user_id):
-    user = CustomUser.objects.get(user_id=user_id)
-    form = EditUserForm(request.POST or None, instance=user)
+    custom_user = CustomUser.objects.get(user_id=user_id)
+    form = EditUserForm(request.POST or None, instance=custom_user)
 
     if form.is_valid():
         form.save()
         return redirect('product:index')
 
-    return render(request, 'user/form.html', {'form': form, 'user': user})
+    return render(request, 'user/form.html', {'form': form, 'custom_user': custom_user})
 
 
 @login_required
 def profile(request):
-    user = CustomUser.objects.get(user_id=request.user.id)
+    custom_user = CustomUser.objects.get(user_id=request.user.id)
 
-    return render(request, 'user/profile.html', {'user': user})
+    return render(request, 'user/profile.html', {'custom_user': custom_user})
 
 
+@login_required
 def users(request):
-    users_list = CustomUser.objects.all()
+    if request.user.is_superuser:
+        users_list = CustomUser.objects.all()
+        return render(request, 'user/index.html', {'users_list': users_list.order_by('id')})
+    else:
+        return redirect('profile')
 
-    return render(request, 'user/index.html', {'users_list': users_list})
+
+def remove_user(request, user_id):
+    user = CustomUser.objects.get(user_id=user_id)
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('user:index')
+
+    return render(request, 'user/remove_confirm.html', {'user': user})

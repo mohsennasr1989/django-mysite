@@ -10,6 +10,6 @@ def build_custom_user(sender, instance, created, **kwargs):
         CustomUser.objects.create(user=instance)
 
 
-# @receiver(post_save, sender=User)
-# def save_custom_user(sender, instance, **kwargs):
-#     instance.save()
+@receiver(post_save, sender=User)
+def save_custom_user(sender, instance, **kwargs):
+    instance.customuser.save()

@@ -1,16 +1,27 @@
-{% extends 'products/base.html' %}
+{% extends 'base.html' %}
 {% block body %}
-    <h1>This is Users List</h1>
+
+    <div class="card-body">
+        <h1>This is Users List</h1>
+    </div>
 
     {% for user in users_list %}
         <div class="row card-body">
             <div class="col-md-2">
-                <img class="card" height="150px" src="{{MEDIA_URL}}{{ user.profile }}"/>
+                <img class="card-body" height="150px" src="{{MEDIA_URL}}{{ user.profile }}"/>
             </div>
             <div class="col-md-4">
                 <h3>{{ user.firstname }} {{ user.lastname }}</h3>
                 <h5>{{ user.user.username }}</h5>
                 <h6>{{ user.user.id }}</h6>
+                <div class="row">
+                    <div class="col-md-2 card-body">
+                        <a href="{% url 'user:edit' user.user.id %}" class="btn btn-primary">Edit</a>
+                    </div>
+                    <div class="col-md-2 card-body">
+                        <a href="{% url 'user:remove' user.user.id %}" class="btn btn-danger">Remove</a>
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}

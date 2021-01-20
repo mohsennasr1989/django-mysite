@@ -18,9 +18,7 @@
             {% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                <a class="nav-item nav-link" href="{% url 'product:add' %}">Add Item</a>
-                <a class="nav-item nav-link" href="#">Edit Item</a>
-                <a class="nav-item nav-link" href="#">Remove Item</a>
+                <a class="nav-item nav-link" href="{% url 'product:add' %}">Add Product</a>
             {% else %}
                 <a class="nav-item nav-link" href="{% url 'signup' %}">SignUp</a>
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>

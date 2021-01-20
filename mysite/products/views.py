@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
-
+from rest_framework import viewsets
 from .forms import ProductForm
 from .models import Products
-
 
 # def products(request):
 #     products_list = Products.objects.all()
@@ -11,6 +10,7 @@ from .models import Products
 #         'products_list': products_list,
 #     }
 #     return render(request, 'products/index.html', context)
+from .serializers import ProductSerializer
 
 
 class ProductsViewClass(ListView):
@@ -71,3 +71,33 @@ def remove_product(request, product_code):
         return redirect('product:index')
 
     return render(request, 'products/remove_confirm.html', {'product': product})
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.all()
+    serializer_class = ProductSerializer
+
+
+class PipeFittingsViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.filter(category='PIPE_FITTING')
+    serializer_class = ProductSerializer
+
+
+class ValvesViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.filter(category='VALVE')
+    serializer_class = ProductSerializer
+
+
+class ManifoldViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.filter(category='MANIFOLD')
+    serializer_class = ProductSerializer
+
+
+class UFHViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.filter(category='UFH')
+    serializer_class = ProductSerializer
+
+
+class ToolsViewSet(viewsets.ModelViewSet):
+    queryset = Products.objects.filter(category='TOOL')
+    serializer_class = ProductSerializer
