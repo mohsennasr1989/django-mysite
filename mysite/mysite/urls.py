@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 
 from products import views as product_view
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register('products', product_view.ProductViewSet)
 router.register('pipe-fittings', product_view.PipeFittingsViewSet)
 router.register('valve', product_view.ValvesViewSet)

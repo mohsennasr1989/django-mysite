@@ -1,0 +1,12 @@
+# install virtualenv package
+pip install virtualenv
+
+# create virtualenv in project directory, named env
+virtualenv env
+
+# activate virtualenv
+cd env
+source bin/activate
+
+## deactivate virtualenv
+deactivate

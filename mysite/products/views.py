@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from rest_framework import viewsets
@@ -13,6 +14,15 @@ from .models import Products
 from .serializers import ProductSerializer
 
 
+def paginated_products_list(request):
+    products = Products.objects.all()
+    paginator = Paginator(products, 2)
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+
+    return render(request, 'products/index.html', {'products_list' : products})
+
+
 class ProductsViewClass(ListView):
     model = Products
     template_name = 'products/index.html'
@@ -22,24 +32,6 @@ class ProductsViewClass(ListView):
 class ProductsDetailViewClass(DetailView):
     model = Products
     template_name = 'products/detail.html'
-
-
-# def product_detail(request, product_code):
-#     details = Products.objects.get(code=product_code)
-#     context = {
-#         'product': details,
-#     }
-#     return render(request, 'products/detail.html', context)
-
-
-# def add_product(request):
-#     form = ProductForm(request.POST or None)
-#
-#     if form.is_valid():
-#         form.save()
-#         return redirect('product:index')
-#
-#     return render(request, 'products/form.html', {'form': form})
 
 
 class AddProductViewClass(CreateView):
