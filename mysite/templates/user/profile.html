@@ -13,7 +13,7 @@
             <h1>{{ custom_user.firstname}} {{ custom_user.lastname}}</h1>
             <h2>{{ custom_user.user_id}}</h2>
             <h3>{{ custom_user.cellphone}}</h3>
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <div class="row card-body">
                     <a href="{% url 'user:edit' custom_user.user_id %}" class="btn btn-primary text-uppercase">Edit Profile</a>
                 </div>
