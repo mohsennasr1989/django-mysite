@@ -18,9 +18,9 @@ def paginated_products_list(request):
     products = Products.objects.all()
     paginator = Paginator(products, 2)
     page = request.GET.get('page')
-    products = paginator.get_page(page)
+    products_list = paginator.get_page(page)
 
-    return render(request, 'products/index.html', {'products_list' : products})
+    return render(request, 'products/index.html', {'products_list': products_list})
 
 
 class ProductsViewClass(ListView):
