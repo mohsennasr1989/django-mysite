@@ -14,32 +14,10 @@ from .models import Products
 from .serializers import ProductSerializer
 
 
-def paginated_products_list(request):
-    products = Products.objects.all()
-    paginator = Paginator(products, 1)
-    page = int(request.GET.get('page', default=1))
-
-    try:
-        products_list = paginator.page(page)
-    except PageNotAnInteger:
-        products_list = paginator.page(1)
-    except EmptyPage:
-        products_list = paginator.page(paginator.num_pages)
-
-    i = 1
-    pages_list = []
-    for page_num in paginator:
-        pages_list.append(i)
-        i += 1
-
-    if len(pages_list) <= 3:
-        paginator_list = pages_list
-    elif page < len(pages_list) - 1:
-        paginator_list = [page - 1, page, page + 1]
-    else:
-        paginator_list = [len(pages_list) - 2, len(pages_list) - 1, len(pages_list)]
-
-    return render(request, 'products/index.html', {'products_list': products_list, 'paginator_list': paginator_list})
+class ProductsPaginateListViewClass(ListView):
+    model = Products
+    template_name = 'products/index.html'
+    paginate_by = 1
 
 
 class ProductsViewClass(ListView):
