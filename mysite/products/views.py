@@ -1,29 +1,30 @@
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from rest_framework import viewsets
 from .forms import ProductForm
 from .models import Products
-
-# def products(request):
-#     products_list = Products.objects.all()
-#     context = {
-#         'products_list': products_list,
-#     }
-#     return render(request, 'products/index.html', context)
 from .serializers import ProductSerializer
-
-
-class ProductsPaginateListViewClass(ListView):
-    model = Products
-    template_name = 'products/index.html'
-    paginate_by = 1
 
 
 class ProductsViewClass(ListView):
     model = Products
     template_name = 'products/index.html'
-    context_object_name = 'products_list'
+    context_object_name = 'page_obj'
+
+    def dispatch(self, request, *args, **kwargs):
+        search_field = self.request.GET.get('search-field')
+        if search_field is not None:
+            self.queryset = self.model.objects.filter(name__icontains=search_field)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.GET.get('page') is not None:
+            self.paginate_by = 2
+            context['is_paginated'] = True
+        else:
+            context['is_paginated'] = False
+        return context
 
 
 class ProductsDetailViewClass(DetailView):

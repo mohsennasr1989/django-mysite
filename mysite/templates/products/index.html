@@ -5,6 +5,15 @@
         <h1>This is Products List</h1>
     </div>
 
+    <div class="col-md-6 col-md-offset-3">
+        <form action="" method="GET">
+            <label>
+                <input type="search" name="search-field"/>
+            </label>
+            <button type="submit" class="btn btn-primary text-capitalize">Search</button>
+        </form>
+    </div>
+
     {% for product in page_obj %}
         <div class="row card-body">
             <div class="col-md-1"></div>
@@ -32,6 +41,7 @@
         </div>
     {% endfor %}
 
+    {% if is_paginated %}
     <nav aria-label="Page Navigation">
         <ul class="pagination">
         {% if page_obj.has_previous %}
@@ -57,4 +67,5 @@
         {% endif %}
           </ul>
     </nav>
+    {% endif %}
 {% endblock %}
