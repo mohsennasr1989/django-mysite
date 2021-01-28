@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
-                    <img src="{{ product.image.url }}" class="card-img-top">
+                    <img src="{{ product.image }}" class="card-img-top">
                     <div class="card-body">
                         <div class="card-title">
                             {{ product.name }}
@@ -15,12 +15,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <h1>{{ product.name }} {{ product.specification }}</h1>
-                <h2>Product Code: {{ product.code }}</h2>
-                <h3>Package Quantity: {{ product.package_quantity }} {{ product.singular_unit }}</h3>
-                <h5>Created By: {{ product.user }}</h5>
             </div>
         </div>
     </div>
