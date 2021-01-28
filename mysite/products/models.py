@@ -39,7 +39,8 @@ class Products(models.Model):
 
     code = models.CharField(verbose_name="کد محصول", max_length=20, blank=False, help_text='Product 6 digits code')
     name = models.CharField(verbose_name="نام محصول", max_length=200, blank=False, help_text='Product name')
-    specification = models.CharField(verbose_name="مشخصات", max_length=300, blank=True, help_text='Product specifications')
+    specification = models.CharField(verbose_name="مشخصات", max_length=300, blank=True, help_text='Product '
+                                                                                                  'specifications')
     size = models.CharField(verbose_name="سایز", max_length=100, blank=True, help_text='Product size')
     singular_unit = models.CharField(verbose_name="واحد", max_length=10, choices=SINGULAR_UNIT_CHOICES, default='PCS',
                                      blank=False, help_text='Product singular unit')
@@ -51,6 +52,7 @@ class Products(models.Model):
                               help_text='Product image')
     category = models.CharField(verbose_name="دسته", max_length=200, choices=CATEGORY_CHOICES, default='PIPE_FITTING',
                                 blank=False)
+    price = models.FloatField(verbose_name="قیمت", default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def get_absolute_url(self):

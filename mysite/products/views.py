@@ -15,16 +15,23 @@ class ProductsViewClass(ListView):
         search_field = self.request.GET.get('search-field')
         if search_field is not None:
             self.queryset = self.model.objects.filter(name__icontains=search_field)
+
+        pagination_field = self.request.GET.get('page')
+        if pagination_field is not None:
+            self.extra_context = {'is_paginated': True}
+            self.paginate_by = 2
+        else:
+            self.extra_context = {'is_paginated': False}
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.GET.get('page') is not None:
-            self.paginate_by = 2
-            context['is_paginated'] = True
-        else:
-            context['is_paginated'] = False
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     if self.request.GET.get('page') is not None:
+    #
+    #         context['is_paginated'] = True
+    #     else:
+    #         context['is_paginated'] = False
+    #     return context
 
 
 class ProductsDetailViewClass(DetailView):
